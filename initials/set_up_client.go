@@ -16,8 +16,8 @@ func SetUpClient() {
 	// Source: Public RPC Node (https://docs.bscscan.com/misc-tools-and-utilities/public-rpc-nodes)
 	// Chainlist: https://chainlist.org/
 	// client, err := ethclient.Dial(os.Getenv("BSC_RPC_NODE"))
-	// Client, err = ethclient.Dial(os.Getenv("LOCAL_NODE"))
-	Client, err = ethclient.Dial(os.Getenv("ETH_RPC_NODE"))
+	Client, err = ethclient.Dial(os.Getenv("LOCAL_NODE"))
+	// Client, err = ethclient.Dial(os.Getenv("ETH_RPC_NODE"))
 	if err != nil {
 		log.Fatal(err)
 	}

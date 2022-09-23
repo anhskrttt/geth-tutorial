@@ -2,7 +2,7 @@ package main
 
 import (
 	"geth-tutorial/initials"
-	"geth-tutorial/transaction"
+	"geth-tutorial/transfer"
 )
 
 func init() {
@@ -35,5 +35,7 @@ func main() {
 	// blockTest := transaction.GetFullBlock(big.NewInt(5671744))
 	// transaction.GetAllTransaction(blockTest)
 	// transaction.GetTransactionByBlockHash()
-	transaction.GetTxByTxHash()
+	// transaction.GetTxByTxHash()
+	// transfer.TransferETH()
+	transfer.TransferERC20()
 }
