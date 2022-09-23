@@ -2,7 +2,7 @@ package main
 
 import (
 	"geth-tutorial/initials"
-	"geth-tutorial/transfer"
+	"geth-tutorial/smart_contracts"
 )
 
 func init() {
@@ -37,5 +37,15 @@ func main() {
 	// transaction.GetTransactionByBlockHash()
 	// transaction.GetTxByTxHash()
 	// transfer.TransferETH()
-	transfer.TransferERC20()
+	// transfer.TransferERC20()
+
+	// smart_contracts.DeployContract()
+
+	// smart_contracts.QueryContract()
+
+	// smart_contracts.WriteContract()
+
+	// smart_contracts.QueryItem()
+
+	smart_contracts.QueryERC20()
 }
