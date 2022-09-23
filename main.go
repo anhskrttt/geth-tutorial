@@ -1,13 +1,21 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"geth-tutorial/initials"
-	"geth-tutorial/smart_contracts"
+	"log"
+	"os"
+
+	"github.com/ethereum/go-ethereum"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/ethclient"
 )
 
 func init() {
 	initials.LoadEnv()
-	initials.SetUpClient()
+	// initials.SetUpClient()
 }
 
 func main() {
@@ -47,5 +55,34 @@ func main() {
 
 	// smart_contracts.QueryItem()
 
-	smart_contracts.QueryERC20()
+	// smart_contracts.QueryERC20()
+
+	//event_log.SubscribeToEvent()
+
+	// Using Websocket
+	client, err := ethclient.Dial(os.Getenv("INFURA_SOCKET_URL"))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// USDT contract
+	contractAddress := common.HexToAddress("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+	query := ethereum.FilterQuery{
+		Addresses: []common.Address{contractAddress},
+	}
+
+	logs := make(chan types.Log)
+	sub, err := client.SubscribeFilterLogs(context.Background(), query, logs)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for {
+		select {
+		case err := <-sub.Err():
+			log.Fatal(err)
+		case vLog := <-logs:
+			fmt.Println(vLog) // pointer to event log
+		}
+	}
 }
